@@ -1,0 +1,46 @@
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.13.2'
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId PACKAGE_NAME
+        minSdkVersion 15
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+    maven { url 'http://jaspersoft.artifactoryonline.com/jaspersoft/jaspersoft-mobile-sdk' }
+    maven { url 'http://jaspersoft.artifactoryonline.com/jaspersoft/jaspersoft-mobile-sdk-snapshots'}
+    maven { url "file://${System.getenv("ANDROID_HOME")}/extras/android/m2repository" }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.jaspersoft.android.sdk:js-android-sdk-client:1.8'
+}
